@@ -1,0 +1,103 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 40 33% 97%;
+    --foreground: 20 40% 12%;
+    --card: 0 0% 100%;
+    --card-foreground: 20 40% 12%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 20 40% 12%;
+    --primary: 0 60% 26%;
+    --primary-foreground: 40 33% 97%;
+    --secondary: 40 40% 92%;
+    --secondary-foreground: 20 40% 12%;
+    --muted: 40 25% 94%;
+    --muted-foreground: 20 15% 40%;
+    --accent: 40 47% 51%;
+    --accent-foreground: 20 40% 12%;
+    --destructive: 0 84% 45%;
+    --destructive-foreground: 40 33% 97%;
+    --border: 40 20% 88%;
+    --input: 40 20% 88%;
+    --ring: 40 47% 51%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 20 40% 8%;
+    --foreground: 40 33% 97%;
+    --card: 20 40% 10%;
+    --card-foreground: 40 33% 97%;
+    --popover: 20 40% 10%;
+    --popover-foreground: 40 33% 97%;
+    --primary: 40 47% 51%;
+    --primary-foreground: 20 40% 12%;
+    --secondary: 20 20% 18%;
+    --secondary-foreground: 40 33% 97%;
+    --muted: 20 20% 18%;
+    --muted-foreground: 40 15% 65%;
+    --accent: 40 47% 51%;
+    --accent-foreground: 20 40% 12%;
+    --destructive: 0 62% 45%;
+    --destructive-foreground: 40 33% 97%;
+    --border: 20 20% 20%;
+    --input: 20 20% 20%;
+    --ring: 40 47% 51%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .gold-gradient {
+    background: linear-gradient(135deg, #D4B471 0%, #B8934B 50%, #8B6D2E 100%);
+  }
+  .gold-text {
+    background: linear-gradient(135deg, #D4B471 0%, #B8934B 50%, #8B6D2E 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .maroon-gradient {
+    background: linear-gradient(135deg, #6B1A1A 0%, #4A0F0F 100%);
+  }
+  .shimmer-gold {
+    background: linear-gradient(90deg, #B8934B 0%, #F5DFA0 50%, #B8934B 100%);
+    background-size: 200% 100%;
+    animation: shimmer 3s linear infinite;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .paisley-divider {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: #B8934B;
+  }
+  .paisley-divider::before,
+  .paisley-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #B8934B, transparent);
+  }
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+}
