@@ -16,6 +16,7 @@ export default function ProductCard({ product }) {
 
   const variant = product.variants?.[0];
   const stock = variant?.quantityAvailable;
+  const hasHoverImage = Boolean(product.images?.[1]);
 
   const handleAddToBag = async (e) => {
     e.preventDefault();
@@ -34,10 +35,10 @@ export default function ProductCard({ product }) {
         <img
           src={product.images?.[0]?.url}
           alt={product.title}
-          className="w-full h-full object-cover transition-all duration-700 group-hover:scale-105 group-hover:opacity-0"
+          className={`w-full h-full object-cover transition-all duration-700 group-hover:scale-105 ${hasHoverImage ? 'group-hover:opacity-0' : ''}`}
           loading="lazy"
         />
-        {product.images?.[1] && (
+        {hasHoverImage && (
           <img
             src={product.images[1].url}
             alt={product.title}
