@@ -13,10 +13,6 @@ export default function Navbar() {
   const links = [
     { href: '/', label: 'Home' },
     { href: '/shop', label: 'Shop All' },
-    { href: '/shop?category=Bridal%20Collection', label: 'Bridal' },
-    { href: '/shop?category=Wedding%20Collection', label: 'Wedding' },
-    { href: '/shop?category=Festive%20Collection', label: 'Festive' },
-    { href: '/shop?category=New%20Arrivals', label: 'New' },
   ];
 
   return (

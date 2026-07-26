@@ -1,33 +1,15 @@
 'use client';
 
 import Link from 'next/link';
-import { Minus, Plus, X, ArrowRight, Tag, Truck, ShieldCheck } from 'lucide-react';
+import { Minus, Plus, X, ArrowRight, Truck, ShieldCheck } from 'lucide-react';
 import Navbar from '@/components/site/Navbar';
 import Footer from '@/components/site/Footer';
 import { useCart } from '@/lib/cart-context';
 import { formatINR } from '@/lib/format';
-import { useState } from 'react';
 import { toast } from 'sonner';
 
 const App = () => {
-  const { items, updateQty, removeItem, subtotal, hydrated } = useCart();
-  const [coupon, setCoupon] = useState('');
-  const [applied, setApplied] = useState(null);
-
-  const shipping = subtotal >= 5000 || subtotal === 0 ? 0 : 199;
-  const discount = applied ? Math.round(subtotal * (applied.pct / 100)) : 0;
-  const total = Math.max(0, subtotal - discount + shipping);
-
-  const applyCoupon = () => {
-    const code = coupon.trim().toUpperCase();
-    if (code === 'PRABHA10') { setApplied({ code, pct: 10 }); toast.success('Coupon applied — 10% off'); }
-    else if (code === 'FESTIVE20') { setApplied({ code, pct: 20 }); toast.success('Festive offer applied — 20% off'); }
-    else { toast.error('Invalid coupon code'); }
-  };
-
-  if (!hydrated) {
-    return <div className="min-h-screen bg-brand-ivory"><Navbar /><div className="container py-32" /></div>;
-  }
+  const { items, updateQty, removeItem, subtotal, hydrated, checkoutUrl, pending } = useCart();
 
   return (
     <div className="min-h-screen bg-brand-ivory">
@@ -40,7 +22,9 @@ const App = () => {
         </div>
       </section>
 
-      {items.length === 0 ? (
+      {!hydrated ? (
+        <div className="container py-32" />
+      ) : items.length === 0 ? (
         <div className="container py-24 text-center">
           <div className="font-serif text-3xl text-brand-maroon mb-4">Your bag awaits its first heirloom</div>
           <p className="text-brand-brown/70 mb-8">Explore our collection and add a piece that speaks to you.</p>
@@ -60,7 +44,7 @@ const App = () => {
             </div>
 
             {items.map((it) => (
-              <div key={it.slug} className="flex items-center gap-4 py-6 border-b border-brand-gold/10">
+              <div key={it.lineId} className="flex items-center gap-4 py-6 border-b border-brand-gold/10">
                 <Link href={`/product/${it.slug}`} className="w-24 aspect-[3/4] bg-brand-cream overflow-hidden shrink-0">
                   <img src={it.image} alt={it.title} className="w-full h-full object-cover" />
                 </Link>
@@ -72,13 +56,20 @@ const App = () => {
                 </div>
                 <div className="w-28 flex items-center justify-center">
                   <div className="flex items-center border border-brand-brown/30">
-                    <button onClick={() => updateQty(it.slug, it.quantity - 1)} className="px-2 py-2 hover:bg-brand-cream"><Minus size={12} /></button>
+                    <button disabled={pending} onClick={() => updateQty(it.lineId, it.quantity - 1)} className="px-2 py-2 hover:bg-brand-cream disabled:opacity-40"><Minus size={12} /></button>
                     <span className="px-3 text-sm min-w-[30px] text-center">{it.quantity}</span>
-                    <button onClick={() => updateQty(it.slug, it.quantity + 1)} className="px-2 py-2 hover:bg-brand-cream"><Plus size={12} /></button>
+                    <button disabled={pending} onClick={() => updateQty(it.lineId, it.quantity + 1)} className="px-2 py-2 hover:bg-brand-cream disabled:opacity-40"><Plus size={12} /></button>
                   </div>
                 </div>
-                <div className="w-24 text-right font-medium text-brand-maroon">{formatINR(it.price * it.quantity)}</div>
-                <button onClick={() => { removeItem(it.slug); toast('Removed from bag'); }} className="w-10 flex justify-center text-brand-brown/50 hover:text-brand-maroon" aria-label="Remove"><X size={18} /></button>
+                <div className="w-24 text-right font-medium text-brand-maroon">{formatINR(it.lineTotal)}</div>
+                <button
+                  disabled={pending}
+                  onClick={() => { removeItem(it.lineId); toast('Removed from bag'); }}
+                  className="w-10 flex justify-center text-brand-brown/50 hover:text-brand-maroon disabled:opacity-40"
+                  aria-label="Remove"
+                >
+                  <X size={18} />
+                </button>
               </div>
             ))}
 
@@ -91,37 +82,20 @@ const App = () => {
           <aside className="bg-brand-cream p-8 h-fit sticky top-32">
             <h2 className="font-serif text-2xl text-brand-maroon mb-6">Order Summary</h2>
 
-            {/* Coupon */}
-            <div className="mb-6">
-              <div className="flex">
-                <input
-                  type="text"
-                  value={coupon}
-                  onChange={(e) => setCoupon(e.target.value)}
-                  placeholder="Coupon code"
-                  className="flex-1 bg-brand-ivory border border-brand-gold/40 px-3 py-2.5 text-sm focus:outline-none focus:border-brand-gold"
-                />
-                <button onClick={applyCoupon} className="bg-brand-brown text-brand-ivory px-4 text-xs tracking-widest uppercase hover:bg-brand-maroon">Apply</button>
-              </div>
-              <div className="text-[10px] text-brand-brown/60 mt-2 flex items-center gap-1"><Tag size={10} /> Try <span className="font-medium">PRABHA10</span> or <span className="font-medium">FESTIVE20</span></div>
-            </div>
-
             <div className="space-y-3 text-sm py-4 border-t border-b border-brand-gold/20">
               <div className="flex justify-between text-brand-brown/80"><span>Subtotal</span><span>{formatINR(subtotal)}</span></div>
-              {applied && (
-                <div className="flex justify-between text-brand-gold-dark"><span>Discount ({applied.code})</span><span>-{formatINR(discount)}</span></div>
-              )}
-              <div className="flex justify-between text-brand-brown/80"><span>Shipping</span><span>{shipping === 0 ? 'FREE' : formatINR(shipping)}</span></div>
+              <div className="text-xs text-brand-brown/60">Shipping and taxes calculated at checkout.</div>
             </div>
 
             <div className="flex justify-between items-baseline py-5">
-              <span className="text-xs tracking-widest uppercase text-brand-brown/70">Grand Total</span>
-              <span className="font-serif text-2xl text-brand-maroon">{formatINR(total)}</span>
+              <span className="text-xs tracking-widest uppercase text-brand-brown/70">Subtotal</span>
+              <span className="font-serif text-2xl text-brand-maroon">{formatINR(subtotal)}</span>
             </div>
 
             <button
-              onClick={() => toast.info('Checkout coming in Phase 2 — Razorpay integration')}
-              className="w-full bg-brand-maroon text-brand-ivory py-4 text-xs tracking-widest uppercase hover:bg-brand-maroon-dark flex items-center justify-center gap-2"
+              disabled={!checkoutUrl || pending}
+              onClick={() => { if (checkoutUrl) window.location.href = checkoutUrl; }}
+              className="w-full bg-brand-maroon text-brand-ivory py-4 text-xs tracking-widest uppercase hover:bg-brand-maroon-dark disabled:opacity-50 flex items-center justify-center gap-2"
             >
               Proceed to Checkout <ArrowRight size={14} />
             </button>
