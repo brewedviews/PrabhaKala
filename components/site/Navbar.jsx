@@ -26,10 +26,7 @@ export default function Navbar() {
         </button>
 
         <Link href="/" className="flex items-center gap-2">
-          <div className="flex flex-col items-center leading-none">
-            <span className="font-serif text-2xl md:text-3xl tracking-widest text-brand-maroon">PRABHA</span>
-            <span className="text-[9px] md:text-[10px] tracking-[0.4em] text-brand-gold-dark -mt-1">— KALA —</span>
-          </div>
+          <img src="/logo-horizontal.png" alt="Prabha Kala" className="h-8 md:h-10 w-auto" />
         </Link>
 
         <nav className="hidden md:flex items-center gap-8">

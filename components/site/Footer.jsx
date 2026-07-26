@@ -1,6 +1,13 @@
 import Link from 'next/link';
 import { Instagram, Facebook, Twitter, Youtube } from 'lucide-react';
 
+const SOCIALS = [
+  { Icon: Instagram, href: 'https://www.instagram.com/prabha_kala_/' },
+  { Icon: Facebook, href: '#' },
+  { Icon: Twitter, href: '#' },
+  { Icon: Youtube, href: '#' },
+];
+
 export default function Footer() {
   return (
     <footer className="bg-brand-brown text-brand-cream mt-20">
@@ -12,8 +19,8 @@ export default function Footer() {
             Handcrafted Banarasi Silk Sarees woven with generations of skill in the sacred looms of Varanasi.
           </p>
           <div className="flex gap-3 mt-6">
-            {[Instagram, Facebook, Twitter, Youtube].map((Icon, i) => (
-              <a key={i} href="#" className="h-9 w-9 rounded-full border border-brand-gold/40 flex items-center justify-center hover:bg-brand-gold hover:text-brand-brown transition-colors">
+            {SOCIALS.map(({ Icon, href }, i) => (
+              <a key={i} href={href} className="h-9 w-9 rounded-full border border-brand-gold/40 flex items-center justify-center hover:bg-brand-gold hover:text-brand-brown transition-colors">
                 <Icon size={16} />
               </a>
             ))}

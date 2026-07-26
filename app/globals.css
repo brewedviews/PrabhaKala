@@ -66,19 +66,19 @@
     text-wrap: balance;
   }
   .gold-gradient {
-    background: linear-gradient(135deg, #D4B471 0%, #B8934B 50%, #8B6D2E 100%);
+    background: linear-gradient(135deg, #e6bf5b 0%, #d99c02 50%, #8d6501 100%);
   }
   .gold-text {
-    background: linear-gradient(135deg, #D4B471 0%, #B8934B 50%, #8B6D2E 100%);
+    background: linear-gradient(135deg, #e6bf5b 0%, #d99c02 50%, #8d6501 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
   }
   .maroon-gradient {
-    background: linear-gradient(135deg, #6B1A1A 0%, #4A0F0F 100%);
+    background: linear-gradient(135deg, #6a5311 0%, #4a3a0c 100%);
   }
   .shimmer-gold {
-    background: linear-gradient(90deg, #B8934B 0%, #F5DFA0 50%, #B8934B 100%);
+    background: linear-gradient(90deg, #d99c02 0%, #f4e3b8 50%, #d99c02 100%);
     background-size: 200% 100%;
     animation: shimmer 3s linear infinite;
     -webkit-background-clip: text;
@@ -89,14 +89,14 @@
     display: flex;
     align-items: center;
     gap: 1rem;
-    color: #B8934B;
+    color: #d99c02;
   }
   .paisley-divider::before,
   .paisley-divider::after {
     content: '';
     flex: 1;
     height: 1px;
-    background: linear-gradient(90deg, transparent, #B8934B, transparent);
+    background: linear-gradient(90deg, transparent, #d99c02, transparent);
   }
   .no-scrollbar::-webkit-scrollbar { display: none; }
   .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
