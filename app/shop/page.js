@@ -15,7 +15,7 @@ export default async function ShopPage() {
         <div className="container">
           <div className="text-xs tracking-[0.4em] uppercase text-brand-gold-dark mb-3">The Collection</div>
           <h1 className="font-serif text-4xl md:text-6xl text-brand-maroon">All Sarees</h1>
-          <p className="mt-4 text-brand-brown/70 max-w-xl mx-auto">Explore our complete edit of handwoven Banarasi silks — each piece one of a kind.</p>
+          <p className="mt-4 text-brand-brown/70 max-w-xl mx-auto">Explore our full edit — Banarasi, Kanjivaram, Organza, and more, each piece one of a kind.</p>
         </div>
       </section>
 

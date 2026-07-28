@@ -18,7 +18,7 @@ export default function Navbar() {
   return (
     <header className="sticky top-0 z-50 bg-brand-ivory/95 backdrop-blur-md border-b border-brand-gold/20">
       <div className="hidden md:block bg-brand-maroon text-brand-ivory text-xs py-2 text-center tracking-widest">
-        FREE SHIPPING ACROSS INDIA · HANDCRAFTED IN VARANASI · CERTIFIED PURE SILK
+        FREE SHIPPING · HANDPICKED FROM INDIA'S FINEST LOOMS · CERTIFIED PURE SILK
       </div>
       <div className="container flex items-center justify-between py-4 md:py-5">
         <button className="md:hidden text-brand-brown" onClick={() => setOpen(!open)}>

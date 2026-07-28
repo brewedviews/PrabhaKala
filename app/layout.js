@@ -7,12 +7,12 @@ const inter = Inter({ subsets: ['latin'], variable: '--font-inter', display: 'sw
 const playfair = Playfair_Display({ subsets: ['latin'], variable: '--font-playfair', display: 'swap' });
 
 export const metadata = {
-  title: 'Prabha Kala — Handcrafted Banarasi Silk Sarees',
-  description: 'Discover authentic handwoven Banarasi Silk Sarees from Varanasi. Every thread tells a story of tradition, craftsmanship and timeless elegance.',
-  keywords: 'banarasi silk saree, indian saree, bridal saree, wedding saree, handloom, varanasi silk',
+  title: "Prabha Kala — Banarasi, Kanjivaram & Handloom Silk Sarees",
+  description: "Handpicked from India's finest looms — Banarasi, Kanjivaram, Organza, and pure cotton sarees sourced directly from the artisans who weave them. Real silk, real zari, no middlemen.",
+  keywords: 'banarasi silk saree, kanjivaram silk saree, organza saree, cotton saree, indian saree, bridal saree, wedding saree, handloom saree',
   openGraph: {
-    title: 'Prabha Kala — Every Thread Tells a Story',
-    description: 'Handcrafted Banarasi Silk Sarees. Heirloom quality. Timeless elegance.',
+    title: "Prabha Kala — Handpicked from India's Finest Looms",
+    description: 'Banarasi, Kanjivaram, Organza, Cotton — real silk, real zari, sourced direct from artisans across India.',
     type: 'website',
   },
 };

@@ -6,7 +6,7 @@ import { Gem, ShieldCheck, Award, Truck } from 'lucide-react';
 const BADGES = [
   { icon: Gem, label: 'Certified Pure Silk' },
   { icon: ShieldCheck, label: 'Secure Payments' },
-  { icon: Award, label: 'Handcrafted in Varanasi' },
+  { icon: Award, label: 'Direct from Artisans' },
   { icon: Truck, label: 'Pan-India Shipping' },
 ];
 

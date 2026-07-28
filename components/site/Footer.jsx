@@ -16,7 +16,7 @@ export default function Footer() {
           <div className="font-serif text-3xl tracking-widest text-brand-gold-light">PRABHA</div>
           <div className="text-[10px] tracking-[0.4em] text-brand-gold mb-4">— KALA —</div>
           <p className="text-sm text-brand-cream/70 leading-relaxed">
-            Handcrafted Banarasi Silk Sarees woven with generations of skill in the sacred looms of Varanasi.
+            Handpicked from India's finest looms — Banarasi, Kanjivaram, Organza, and more, sourced straight from the artisans who make them.
           </p>
           <div className="flex gap-3 mt-6">
             {SOCIALS.map(({ Icon, href }, i) => (
@@ -62,7 +62,7 @@ export default function Footer() {
       <div className="border-t border-brand-gold/20">
         <div className="container py-6 flex flex-col md:flex-row justify-between items-center gap-3 text-xs text-brand-cream/50">
           <div>© {new Date().getFullYear()} Prabha Kala. All rights reserved.</div>
-          <div>Handwoven with love in Varanasi, India.</div>
+          <div>Handwoven with love, across India.</div>
         </div>
       </div>
     </footer>

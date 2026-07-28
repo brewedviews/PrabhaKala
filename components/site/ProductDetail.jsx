@@ -154,7 +154,6 @@ export default function ProductDetail({ product, similar }) {
             <div className="space-y-4">
               <p>{product.description}</p>
               <ul className="list-disc pl-5 space-y-1 text-sm">
-                <li>Handwoven in Varanasi by master weavers</li>
                 <li>Comes with matching blouse piece (0.8m)</li>
                 <li>Length: 5.5m saree + 0.8m blouse</li>
               </ul>
