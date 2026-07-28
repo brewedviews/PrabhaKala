@@ -26,7 +26,7 @@ export default function Navbar() {
         </button>
 
         <Link href="/" className="flex items-center gap-2">
-          <img src="/logo-horizontal.png" alt="Prabha Kala" className="h-8 md:h-10 w-auto" />
+          <img src="/logo-new.png" alt="Prabha Kala" className="h-12 md:h-16 w-auto" />
         </Link>
 
         <nav className="hidden md:flex items-center gap-8">
