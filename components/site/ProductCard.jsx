@@ -6,6 +6,8 @@ import { useCart } from '@/lib/cart-context';
 import { formatINR, discountPct } from '@/lib/format';
 import { toast } from 'sonner';
 
+const PLACEHOLDER_IMG = 'https://images.pexels.com/photos/10317106/pexels-photo-10317106.jpeg?w=800&q=80';
+
 export default function ProductCard({ product }) {
   const { addItem, toggleWishlist, wishlist } = useCart();
   const inWishlist = wishlist.includes(product.handle);
@@ -16,7 +18,8 @@ export default function ProductCard({ product }) {
 
   const variant = product.variants?.[0];
   const stock = variant?.quantityAvailable;
-  const hasHoverImage = Boolean(product.images?.[1]);
+  const primaryImage = product.images?.[0]?.url ?? PLACEHOLDER_IMG;
+  const hoverImage = product.images?.[1]?.url ?? primaryImage;
 
   const handleAddToBag = async (e) => {
     e.preventDefault();
@@ -33,19 +36,17 @@ export default function ProductCard({ product }) {
     <div className="group relative">
       <Link href={`/product/${product.handle}`} className="block overflow-hidden bg-brand-cream aspect-[3/4] relative">
         <img
-          src={product.images?.[0]?.url}
+          src={primaryImage}
           alt={product.title}
-          className={`w-full h-full object-cover transition-all duration-700 group-hover:scale-105 ${hasHoverImage ? 'group-hover:opacity-0' : ''}`}
+          className="w-full h-full object-cover transition-all duration-700 group-hover:scale-105 group-hover:opacity-0"
           loading="lazy"
         />
-        {hasHoverImage && (
-          <img
-            src={product.images[1].url}
-            alt={product.title}
-            className="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-700 group-hover:opacity-100"
-            loading="lazy"
-          />
-        )}
+        <img
+          src={hoverImage}
+          alt={product.title}
+          className="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-700 group-hover:opacity-100"
+          loading="lazy"
+        />
         {disc > 0 && (
           <div className="absolute top-3 left-3 bg-brand-maroon text-white text-[10px] tracking-widest px-2 py-1">
             -{disc}%

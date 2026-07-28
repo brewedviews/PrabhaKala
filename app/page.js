@@ -1,9 +1,8 @@
 import HomeContent from '@/components/site/HomeContent';
-import { getCollectionByHandle } from '@/lib/shopify/collections';
+import { getProducts } from '@/lib/shopify/products';
 
 export default async function HomePage() {
-  const frontpage = await getCollectionByHandle('frontpage', { first: 8 });
-  const featured = frontpage?.products || [];
+  const { products } = await getProducts({ first: 12 });
 
-  return <HomeContent featured={featured} />;
+  return <HomeContent trending={products} />;
 }

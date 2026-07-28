@@ -66,6 +66,7 @@ module.exports = {
             'maroon-dark': '#4a3a0c',
             red: '#B01818',
             brown: '#3A2418',
+            charcoal: '#14100A',
           }
         },
         borderRadius: {
