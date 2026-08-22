@@ -1,5 +1,6 @@
 import Navbar from '@/components/site/Navbar';
 import Footer from '@/components/site/Footer';
+import RatingTrustStrip from '@/components/site/RatingTrustStrip';
 import HeroCarousel from '@/components/site/HeroCarousel';
 import TrendingRail from '@/components/site/TrendingRail';
 import CategoryTiles from '@/components/site/CategoryTiles';
@@ -13,6 +14,7 @@ export default function HomeContent({ trending }) {
   return (
     <div className="min-h-screen bg-brand-ivory">
       <Navbar />
+      <RatingTrustStrip />
       <HeroCarousel />
       <TrendingRail products={trending} />
       <CategoryTiles />

@@ -1,9 +1,10 @@
 'use client';
 
 import Link from 'next/link';
-import { Heart, ShoppingBag } from 'lucide-react';
+import { Heart, ShoppingBag, Star } from 'lucide-react';
 import { useCart } from '@/lib/cart-context';
 import { formatINR, discountPct } from '@/lib/format';
+import { getPlaceholderRating } from '@/lib/placeholders';
 import { toast } from 'sonner';
 
 const PLACEHOLDER_IMG = 'https://images.pexels.com/photos/10317106/pexels-photo-10317106.jpeg?w=800&q=80';
@@ -20,6 +21,7 @@ export default function ProductCard({ product }) {
   const stock = variant?.quantityAvailable;
   const primaryImage = product.images?.[0]?.url ?? PLACEHOLDER_IMG;
   const hoverImage = product.images?.[1]?.url ?? primaryImage;
+  const { rating, reviewCount } = getPlaceholderRating(product.handle);
 
   const handleAddToBag = async (e) => {
     e.preventDefault();
@@ -48,8 +50,8 @@ export default function ProductCard({ product }) {
           loading="lazy"
         />
         {disc > 0 && (
-          <div className="absolute top-3 left-3 bg-brand-maroon text-white text-[10px] tracking-widest px-2 py-1">
-            -{disc}%
+          <div className="absolute top-3 left-3 bg-brand-red text-white text-xs font-bold px-2.5 py-1 rounded-sm shadow-sm">
+            -{disc}% OFF
           </div>
         )}
         {stock != null && stock <= 5 && stock > 0 && (
@@ -78,10 +80,19 @@ export default function ProductCard({ product }) {
         <Link href={`/product/${product.handle}`}>
           <h3 className="font-serif text-lg text-brand-brown hover:text-brand-maroon transition-colors">{product.title}</h3>
         </Link>
+        {/* PLACEHOLDER rating — see lib/placeholders.js */}
+        <div className="mt-1 flex items-center justify-center gap-1 text-xs text-brand-brown/60">
+          <Star size={12} className="fill-brand-gold text-brand-gold" />
+          <span className="font-medium text-brand-brown">{rating}</span>
+          <span>({reviewCount})</span>
+        </div>
         <div className="mt-2 flex items-center justify-center gap-2">
           <span className="font-medium text-brand-maroon">{formatINR(price)}</span>
           {disc > 0 && (
-            <span className="text-xs text-brand-brown/40 line-through">{formatINR(compareAt)}</span>
+            <>
+              <span className="text-xs text-brand-brown/40 line-through">{formatINR(compareAt)}</span>
+              <span className="text-xs font-semibold text-brand-red">-{disc}% off</span>
+            </>
           )}
         </div>
       </div>
